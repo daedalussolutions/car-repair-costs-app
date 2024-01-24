@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_23_224727) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_24_231357) do
   create_table "reviews", force: :cascade do |t|
     t.string "title"
     t.integer "price"
@@ -29,10 +29,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_23_224727) do
     t.float "minimum_price"
     t.float "maximum_price"
     t.float "average_price"
-    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_services_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,5 +42,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_23_224727) do
 
   add_foreign_key "reviews", "services"
   add_foreign_key "reviews", "users"
-  add_foreign_key "services", "users"
 end

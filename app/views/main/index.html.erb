@@ -1,1 +1,18 @@
 <h1>Homepage</h1>
+
+<h2>Popular Services9</h2>
+
+
+<% if @services.any? %>
+<% @services.each do |service| %>
+    <div class="service-details">
+        <li>
+            <%= service.title %><br>
+            <%= service.average_price %>
+        </li>
+    
+    </div>
+    <% end %>
+<% else %>
+<p>No services<p>
+<% end %>

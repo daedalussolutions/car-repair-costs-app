@@ -1,0 +1,8 @@
+<h1>Create New Service</h1>
+
+<%= form_with model: @service, url: service_path do |form| %>
+    <div>
+        <%= form.label :title %>
+        <%= form.text_input :title %>
+    </div>
+<% end %>

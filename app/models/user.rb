@@ -12,6 +12,6 @@ class User < ApplicationRecord
         email
     end
 
-    has_many :reviews, dependant: :destroy
+    has_many :reviews
     
 end
