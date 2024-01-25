@@ -1,13 +1,13 @@
 <h1>Homepage</h1>
 
-<h2>Popular Services9</h2>
+<h2>Popular Services</h2>
 
 
 <% if @services.any? %>
 <% @services.each do |service| %>
+ <h3><%= link_to service.title, service_path(service) %></h3>
     <div class="service-details">
         <li>
-            <%= service.title %><br>
             <%= service.average_price %>
         </li>
     
