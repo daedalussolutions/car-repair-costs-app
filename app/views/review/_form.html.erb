@@ -1,0 +1,24 @@
+<h2>Leave a review</h2>
+<%= form_for [ @service, @review ] do |form| %>
+
+    <%= form.hidden_field :user_id, value: current_user.id if current_user %>
+    <div>
+        <%= form.text_field :title, placeholder: "Summary" %>
+    </div>
+
+    <div>
+        <%= form.number_field :price, placeholder: "Amount paid" %>
+    <div>
+
+    <div>
+        <%= form.text_field :description, placeholder: "Details (optional)" %>
+    </div>
+
+    <div>
+        <%= form.date_select :date %>
+    </div>
+
+    <%= form.submit "Submit Review"%>
+
+<% end %>
+

@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resource :registration
   resource :password_reset
   resource :password
-  resources :service
+  resources :service do
+    resources :reviews
+  end
 
 
   # Defines the root path route ("/")

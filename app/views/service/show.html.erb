@@ -4,14 +4,7 @@
 <p>Maximum Price: $<%= @service.maximum_price %></p>
 <p>Average Price: $<%= @service.average_price %></p>
 
-<!-- Add more details as needed -->
-
 <h2>Reviews</h2>
-<% if @service.reviews.any? %>
-    <% @service.reviews.each do |review| %>
-    <p><%= review.comment %></p>
-    <!-- Add more review details as needed -->
-    <% end %>
-<% else %>
-<p>No reviews yet.</p>
-<% end %>
+<%= render partial: 'service/review', collection: @service.reviews.reverse %>
+
+<%= render partial: 'review/form' %>

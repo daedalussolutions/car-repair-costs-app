@@ -5,6 +5,7 @@ class ServiceController < ApplicationController
 
     def show 
         @service = Service.find(params[:id])
+        @review = @service.reviews.build
     end
 
     private
