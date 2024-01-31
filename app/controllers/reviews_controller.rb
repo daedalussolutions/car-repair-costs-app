@@ -7,7 +7,9 @@ class ReviewsController < ApplicationController
         @review = Review.new(review_params)
         @review.service_id = params[:service_id]
 
-        @review.user_id = 1 # Change this to current_user 
+        @review.user_id = 3
+        @review.first_name = current_user.first_name
+        @review.last_name = current_user.last_name
 
         @review.save
 
@@ -17,6 +19,6 @@ class ReviewsController < ApplicationController
     private
 
     def review_params
-        params.require(:review).permit(:title, :price, :description, :date)
+        params.require(:review).permit(:title, :price, :description, :date, :user_id, :first_name, :last_name)
     end
 end
