@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_30_225001) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_31_233317) do
   create_table "reviews", force: :cascade do |t|
     t.string "title"
     t.integer "price"
@@ -38,6 +38,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_30_225001) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
   end
 
   add_foreign_key "reviews", "services"

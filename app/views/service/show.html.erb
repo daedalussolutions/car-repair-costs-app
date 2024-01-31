@@ -7,4 +7,8 @@
 <h2>Reviews</h2>
 <%= render partial: 'service/review', collection: @service.reviews.reverse %>
 
-<%= render partial: 'review/form' %>
+<% if user_signed_in? %>
+    <%= render partial: 'review/form' %>
+<% else %>
+    <p><%= link_to "Log in", new_session_path %> to leave a review</p>
+<% end %>
