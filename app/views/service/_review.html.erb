@@ -1,6 +1,8 @@
-<div>
-    <h4>Review by <%= review.first_name %> <%= review.last_name %></h4>
-    <p><%= review.title %></p>
-    <p><%= review.price %></p>
-    <p><%= review.description %></p>
+<div class="card mt-3">
+    <div class="card-body">
+        <h5 class="card-title"><%= review.title %></h5>
+        <h6 class="card-subtitle mb-2 text-muted">Review by <%= review.first_name %> <%= review.last_name %></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Price paid: $<%= review.price %></h6>
+        <p class="card-text"><%= review.description %></p>
+    </div>
 </div>

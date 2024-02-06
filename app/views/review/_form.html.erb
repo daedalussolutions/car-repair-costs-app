@@ -1,24 +1,27 @@
-<h2>Leave a review</h2>
+<h6>Leave a review</h6>
 <%= form_for [ @service, @review ] do |form| %>
 
     <%= form.hidden_field :user_id, value: current_user.id if current_user %>
-    <div>
-        <%= form.text_field :title, placeholder: "Summary" %>
+    <div class="form-group">
+        <%= form.label :title, "Summary: " %>
+        <%= form.text_field :title, :class=>"form-control" %>
     </div>
 
-    <div>
-        <%= form.number_field :price, placeholder: "Amount paid" %>
-    <div>
-
-    <div>
-        <%= form.text_field :description, placeholder: "Details (optional)" %>
+    <div class="form-group">
+        <%= form.label :price, "Amount Paid: " %>
+        <%= form.number_field :price, :class=>"form-control" %>
     </div>
 
-    <div>
-        <%= form.date_select :date %>
+    <div class="form-group">
+        <%= form.label :description, "Details (optional): " %>
+        <%= form.text_area :description, :class=>"form-control" %>
     </div>
 
-    <%= form.submit "Submit Review"%>
+    <div class="form-group">
+        <%= form.label :date, "Date of service: "%>
+        <%= form.date_select :date, :class=>"form-control" %>
+    </div>
+
+    <%= form.submit "Submit Review", :class=>"btn btn-primary" %>
 
 <% end %>
-

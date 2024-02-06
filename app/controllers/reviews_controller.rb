@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
         @review = Review.new(review_params)
         @review.service_id = params[:service_id]
 
-        @review.user_id = 3
+        @review.user_id = 1
         @review.first_name = current_user.first_name
         @review.last_name = current_user.last_name
 
