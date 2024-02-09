@@ -1,0 +1,12 @@
+<% if @services.any? %>
+<% @services.each do |service| %>
+    <div class="card p-2 m-4" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title"><%= link_to service.title, service_path(service) %></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Average Price: $<%= service.average_price %> USD</h6>
+        </div>
+    </div>
+    <% end %>
+<% else %>
+<p>No services<p>
+<% end %>

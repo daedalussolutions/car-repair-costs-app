@@ -3,7 +3,11 @@
     <div class="col-md-8">
       <h1><%= @service.title %></h1>
       <h4>Averaging $<%= @service.average_price %></h4>
-      <p>Description of the company goes here...</p>
+      <% if @service.description %>
+        <%= @service.description %>
+      <% else %>
+        <p>No description</p>
+      <% end %>
       <h3>Reviews</h3>
       <% if user_signed_in? %>
         <%= render partial: 'review/form' %>

@@ -12,4 +12,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
    root "main#index"
+   get "services", to: "services#index"
+   get "account", to: "account#index"
+   get "about", to: "about#index"
+   get "privacy", to: "privacy#index"
+   get "terms_of_service", to: "terms_of_service#index"
+   get "settings", to: "settings#index"
 end
