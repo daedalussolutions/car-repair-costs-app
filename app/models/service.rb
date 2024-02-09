@@ -3,18 +3,19 @@ class Service < ApplicationRecord
 
     validates :title, length: { maximum: 50 }, presence: true
     validates :description, length: { maximum: 250 }, allow_blank: true
-    validates :minimum_price, allow_blank: true, numericality: { greater_than: 0, less_than: 5000 }
-    validates :maximum_price, allow_blank: true, numericality: { greater_than: 0, less_than: 5000 }
-    validates :average_price, allow_blank: true, numericality: { greater_than: 0, less_than: 5000 }
+    validates :minimum_price, allow_blank: true, numericality: { greater_than: 0, less_than: 9999 }
+    validates :maximum_price, allow_blank: true, numericality: { greater_than: 0, less_than: 9999 }
+    validates :average_price, allow_blank: true, numericality: { greater_than: 0, less_than: 9999 }
 
 
     def calculate_average_price
-        self.average_price = (minimum_price + maximum_price) / 2.0
+        lowest_price_review = reviews.order(price: :asc).first
+        update(minimum_price: lowest_price_review.price) if lowest_price_review
+
+        highest_price_review = reviews.order(price: :desc).first
+        update(maximum_price: highest_price_review.price) if highest_price_review
+
+        update(average_price: (highest_price_review.price + lowest_price_review.price) / 2)
     end
 
-    def calculate_minimum_price 
-    end
-
-    def calculate_maximum_price
-    end
 end

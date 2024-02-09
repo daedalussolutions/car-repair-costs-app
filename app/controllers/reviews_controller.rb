@@ -6,6 +6,7 @@ class ReviewsController < ApplicationController
     def create
         @review = Review.new(review_params)
         @review.service_id = params[:service_id]
+        @service = Service.find_by(id: @review.service_id)
 
         @review.user_id = 1
         @review.first_name = current_user.first_name
@@ -13,8 +14,10 @@ class ReviewsController < ApplicationController
 
         @review.save
 
+        @service.calculate_average_price
+
         redirect_to service_path(@review.service)
-    end
+    end 
 
     private
 
