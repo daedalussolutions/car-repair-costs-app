@@ -7,5 +7,7 @@ class Review < ApplicationRecord
     validates :price, numericality: true, numericality: { greater_than: 0, less_than: 5000 }, presence: true
     validates :description, allow_blank: true, length: { maximum: 400}
     validates :date, presence: true
+    validates :vehicle, presence: true
+    validates :business, presence: true 
     validates :user_id, presence: true
 end

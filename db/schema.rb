@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_07_211452) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_10_212150) do
   create_table "reviews", force: :cascade do |t|
     t.string "title"
     t.integer "price"
@@ -22,6 +22,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_07_211452) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
+    t.string "vehicle_make"
+    t.string "vehicle_model"
+    t.string "vehicle_year"
+    t.string "business"
     t.index ["service_id"], name: "index_reviews_on_service_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
