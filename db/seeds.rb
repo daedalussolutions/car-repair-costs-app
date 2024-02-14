@@ -24,3 +24,53 @@ Service.create!([{
     maximum_price: 759.30,
     average_price: 479.25
 }])
+
+# Seed Vehicle Makes
+vehicle_makes = [
+  "Toyota", "Ford", "Chevrolet", "Honda", "Nissan",
+  "Jeep", "Subaru", "BMW", "Mercedes-Benz", "GMC",
+  "Ram", "Hyundai", "Lexus", "Volkswagen", "Audi",
+  "Kia", "Mazda", "Volvo", "Tesla", "Porsche",
+  "Cadillac", "Buick", "Acura", "Infiniti", "Chrysler",
+  "Lincoln", "Land Rover", "Jaguar", "Dodge", "Mitsubishi",
+  "Mini", "Fiat", "Alfa Romeo", "Genesis", "Bentley",
+  "Maserati", "Ferrari", "Lamborghini", "Rolls-Royce", "McLaren",
+  "Bugatti", "Lotus", "Aston Martin", "Smart", "Maybach",
+  "Koenigsegg", "Pagani", "Spyker", "Hennessey", "Vector",
+  "Saleen", "Shelby", "Lancia", "Dacia", "Tata",
+  "Citroen", "Peugeot", "Renault", "Saab", "Opel",
+  "Seat", "Skoda", "Fiat", "Daihatsu", "Suzuki",
+  "Proton", "Perodua", "Isuzu", "Hino", "Scion",
+  "Daewoo", "Geely", "Chery", "Great Wall", "Brilliance",
+  "Dongfeng", "Zotye", "JAC", "Changan", "BAIC",
+  "BYD", "Wuling", "Mahindra", "Tata", "Maruti Suzuki",
+  "Force", "Premier", "Hindustan", "Eicher", "Ashok Leyland"
+]
+
+vehicle_makes.each do |make_name|
+  VehicleMake.create(name: make_name)
+end
+
+# Seed Vehicle Models and Years
+vehicle_models_years = {
+  "Toyota" => ["Camry", "Corolla", "RAV4", "Highlander", "Tacoma", "4Runner", "Sienna", "Prius"],
+  "Ford" => ["F-150", "Escape", "Explorer", "Focus", "Mustang", "Fusion", "Edge", "Expedition"],
+  "Chevrolet" => ["Silverado 1500", "Equinox", "Tahoe", "Suburban", "Traverse", "Malibu", "Camaro", "Colorado"],
+  "Honda" => ["Civic", "Accord", "CR-V", "Pilot", "Odyssey", "HR-V", "Fit", "Ridgeline"],
+  "Nissan" => ["Rogue", "Altima", "Sentra", "Frontier", "Pathfinder", "Versa", "Maxima", "Titan"],
+  "Jeep" => ["Wrangler", "Grand Cherokee", "Cherokee", "Compass", "Renegade", "Gladiator", "Wrangler Unlimited", "Liberty"],
+  "Subaru" => ["Outback", "Forester", "Crosstrek", "Impreza", "Legacy", "WRX", "Ascent", "BRZ"],
+  "BMW" => ["3 Series", "5 Series", "X3", "X5", "X1", "4 Series", "X7", "7 Series"],
+  # Add more models for other makes as required
+}
+
+vehicle_models_years.each do |make_name, models|
+  make = VehicleMake.find_by(name: make_name)
+  models.each do |model_name|
+    vehicle_model = make.vehicle_models.create(name: model_name)
+    (1980..2023).each do |year|
+        vehicle_model.vehicle_years.create(year: year)
+    end
+  end
+end
+

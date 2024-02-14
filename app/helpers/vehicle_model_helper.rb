@@ -1,0 +1,2 @@
+module VehicleModelHelper
+end
