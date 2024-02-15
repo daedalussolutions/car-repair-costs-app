@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   resources :service do
     resources :reviews
   end
+  resources :vehicle_makes do
+    collection do 
+      get :fetch_make_models
+    end
+  end
 
 
   # Defines the root path route ("/")

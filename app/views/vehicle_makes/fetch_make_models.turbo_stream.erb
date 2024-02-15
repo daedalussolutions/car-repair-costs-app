@@ -1,0 +1,11 @@
+<% if @models.present? %>
+    <%= turbo_stream.replace "make_models_list" do %>
+        <div class="form-group" id="make_models_list">
+            <select class="form-select form-select-lg" name="review[model]" id="review_model">
+                <% @models.each do |model| %>
+                    <option value="<%= model.id %>"><%= model.name %></option>
+                <% end %>
+            </select>
+        </div>
+    <% end %>
+<% end %>
