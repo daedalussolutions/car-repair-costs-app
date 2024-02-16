@@ -22,6 +22,6 @@ class ReviewsController < ApplicationController
     private
 
     def review_params
-        params.require(:review).permit(:title, :price, :vehicle_model, :vehicle_make, :vehicle_year :description, :date, :user_id, :first_name, :last_name)
+        params.require(:review).permit(:title, :price, :vehicle_make_name, :vehicle_model_name, :vehicle_year_year, :description, :date, :user_id, :first_name, :last_name)
     end
 end

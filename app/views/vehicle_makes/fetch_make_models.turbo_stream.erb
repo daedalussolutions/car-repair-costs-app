@@ -1,9 +1,14 @@
 <% if @models.present? %>
     <%= turbo_stream.replace "make_models_list" do %>
         <div class="form-group" id="make_models_list">
-            <select class="form-select form-select-lg" name="review[model]" id="review_model">
-                <% @models.each do |model| %>
-                    <option value="<%= model.id %>"><%= model.name %></option>
+            <select class="form-select mt-1" name="review[vehicle_model_name]" id="review_model">
+                <% @models.each do |vehicle_model| %>
+                    <option value="<%= vehicle_model.name %>"><%= vehicle_model.name %></option>
+                <% end %>
+            </select>
+            <select class="form-select mt-1" name="review[vehicle_year_year]" id="review_model">
+                <% (1980..2025).to_a.reverse.each do |year| %>
+                    <option value="<%= year %>"><%= year %></option>
                 <% end %>
             </select>
         </div>
