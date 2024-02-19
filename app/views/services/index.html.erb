@@ -1,12 +1,25 @@
 <% if @services.any? %>
-<% @services.each do |service| %>
-    <div class="card p-2 m-4" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title"><%= link_to service.title, service_path(service) %></h5>
+  <div class="row">
+    <div class="col-md-6">
+      <% @services.each_with_index do |service, index| %>
+        <div class="card p-2 m-4 service-card" style="width: 18rem;" data-index="<%= index + 1 %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= service.title %></h5>
             <h6 class="card-subtitle mb-2 text-muted">Average Price: $<%= service.average_price %> USD</h6>
+          </div>
         </div>
+      <% end %>
     </div>
-    <% end %>
+    <div class="col-md-6">
+      <div id="active-service-container">
+        <div class="card p-2 m-4">
+            <%= render partial: 'shared/service', locals: { service: @services.first } %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% else %>
-<p>No services<p>
+  <p>No services</p>
 <% end %>
+
+<%= javascript_include_tag 'services', 'data-turbo-track': 'reload', defer: true %>

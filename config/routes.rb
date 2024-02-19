@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :service do
     resources :reviews
   end
+  resources :services, only: [:show]
   resources :vehicle_makes do
     collection do 
       get :fetch_make_models
