@@ -3,10 +3,10 @@
         <h2 style="text-align: center;">Popular Services</h2>
         <% if @services.any? %>
         <% @services.each do |service| %>
-            <div class="card p-2 m-4" style="width: 18rem;">
+            <div class="card p-2 m-4" style="width: 23rem;">
                 <div class="card-body">
                     <h5 class="card-title"><%= link_to service.title, service_path(service) %></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Average Price: $<%= service.average_price %> USD</h6>
+                    <h6 class="card-subtitle mb-2">$<%= service.minimum_price %> - $<%= service.maximum_price %> USD (WrenchPortal est.)</h6>
                 </div>
             </div>
             <% end %>
@@ -18,6 +18,7 @@
         <h2 style="text-align: center;">Recent Reviews<h2>
         <% if @recent_reviews.any? %>
         <% @recent_reviews.each do |review| %>
+            <% will_paginate @recent_reviews%>
             <div style="display: flex;">
                 <%= render partial: 'service/review', object: review, :style => "width: 100%;" %>
                 <button class="btn btn-secondary ms-1 mt-3"><%= link_to review.service.title, service_path(review.service), :class => "dropdown-item" %></button>
