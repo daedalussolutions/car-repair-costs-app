@@ -1,8 +1,8 @@
 <% if @services.any? %>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-3">
       <% @services.each_with_index do |service, index| %>
-        <div class="card p-2 m-4 service-card" style="width: 18rem;" data-index="<%= index + 1 %>">
+        <div class="card p-2 m-4 service-card" style="width: 22rem;" data-index="<%= index + 1 %>">
           <div class="card-body">
             <h5 class="card-title"><%= service.title %></h5>
             <h6 class="card-subtitle mb-2 text-muted">Average Price: $<%= service.average_price %> USD</h6>
@@ -10,11 +10,9 @@
         </div>
       <% end %>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
       <div id="active-service-container">
-        <div class="card p-2 m-4">
             <%= render partial: 'shared/service', locals: { service: @services.first } %>
-        </div>
       </div>
     </div>
   </div>

@@ -1,25 +1,29 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <h1><%= service.title %></h1>
-      <h4>Averaging $<%= service.average_price %></h4>
-      <% if service.description %>
-        <%= service.description %>
-      <% else %>
-        <p>No description</p>
-      <% end %>
-      <h3>Reviews</h3>
-      <%= render partial: 'service/review', collection: service.reviews.reverse %>
+<div class="card p-2 m-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <h1><%= service.title %></h1>
+          <h4>Averaging $<%= service.average_price %></h4>
+          <% if service.description %>
+            <%= service.description %>
+          <% else %>
+            <p>No description</p>
+          <% end %>
+          <h3>Reviews</h3>
+          <% service.reviews.limit(4).each do |review| %>
+            <%= render partial: 'service/review', locals: { review: review } %>
+           <% end %>
+        </div>
+        <div class="col-md-4">
+          <h3>Service Information</h3>
+          <ul class="list-group">
+            <li class="list-group-item">Minimum Price: $<%= service.minimum_price %> USD</li>
+            <li class="list-group-item">Maximum Price: $<%= service.maximum_price %> USD</li>
+            <li class="list-group-item">Most Common Service Provider: Mr. Lube</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="col-md-4">
-      <h3>Service Information</h3>
-      <ul class="list-group">
-        <li class="list-group-item">Minimum Price: $<%= service.minimum_price %> USD</li>
-        <li class="list-group-item">Maximum Price: $<%= service.maximum_price %> USD</li>
-        <li class="list-group-item">Most Common Service Provider: Mr. Lube</li>
-      </ul>
-    </div>
-  </div>
 </div>
 
 
