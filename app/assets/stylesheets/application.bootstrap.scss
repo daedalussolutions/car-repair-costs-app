@@ -1,2 +1,10 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+a {
+    text-decoration: none!important;
+}
+.option-card:hover {
+    background-color: #1a1a1a29;
+    cursor: pointer;
+}

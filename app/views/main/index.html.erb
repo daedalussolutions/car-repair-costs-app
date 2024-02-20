@@ -3,13 +3,15 @@
         <h2 style="text-align: center;">Popular Services</h2>
         <% if @services.any? %>
         <% @services.each do |service| %>
-            <div class="card p-2 m-4" style="width: 23rem;">
-                <div class="card-body">
-                    <h5 class="card-title"><%= link_to service.title, service_path(service) %></h5>
-                    <h6 class="card-subtitle mb-2">$<%= service.minimum_price %> - $<%= service.maximum_price %> USD (WrenchPortal est.)</h6>
+            <%= link_to service_path(service) do %>
+                <div class="card option-card p-2 m-4" style="width: 23rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= service.title %></h5>
+                        <h6 class="card-subtitle mb-2">$<%= service.minimum_price %> - $<%= service.maximum_price %> USD (WrenchPortal est.)</h6>
+                    </div>
                 </div>
-            </div>
             <% end %>
+        <% end %>
         <% else %>
         <p>No services<p>
         <% end %>
