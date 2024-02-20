@@ -10,9 +10,15 @@
             <p>No description</p>
           <% end %>
           <h3>Reviews</h3>
-          <% service.reviews.limit(4).each do |review| %>
-            <%= render partial: 'service/review', locals: { review: review } %>
-           <% end %>
+          <% if service.reviews.any? %>
+            <% service.reviews.limit(4).each do |review| %>
+                <%= render partial: 'service/review', locals: { review: review } %>
+            <% end %>
+            <button class="btn btn-primary ms-1 mt-3"><%= link_to "See all reviews", service_path(service), :class => "dropdown-item" %></button>
+          <% else %>
+            <p>No reviews yet.</p>
+            <button class="btn btn-primary ms-1 mt-3"><%= link_to "Go to service page", service_path(service), :class => "dropdown-item" %></button>
+          <% end %>
         </div>
         <div class="col-md-4">
           <h3>Service Information</h3>
