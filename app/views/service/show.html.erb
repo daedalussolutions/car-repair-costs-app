@@ -19,7 +19,16 @@
         <% end %>
       </div>
       
-      <%= render partial: 'service/review', collection: @service.reviews.reverse %>
+      <% if @reviews.any? %>
+        
+        <% @reviews.each do |review| %>
+          <%= render partial: 'service/review', locals: { review: review } %>
+        <% end %>
+      <%= page_entries_info @reviews %>
+      <div class="digg_pagination"><%= will_paginate @reviews %></div>
+      <% else %>
+        <p>No reviews yet.</p>
+      <% end %>
     </div>
     <div class="col-md-4 ">
       <div class="card p-2 m-1">

@@ -6,6 +6,7 @@ class ServiceController < ApplicationController
     def show 
         @service = Service.find(params[:id])
         @review = @service.reviews.build
+        @reviews = @service.reviews.paginate(page: params[:page], per_page: 10)
     end
 
     private

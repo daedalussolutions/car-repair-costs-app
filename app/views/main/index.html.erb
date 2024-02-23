@@ -20,7 +20,7 @@
         <h2 style="text-align: center;">Recent Reviews<h2>
         <% if @recent_reviews.any? %>
         <% @recent_reviews.each do |review| %>
-            <% will_paginate @recent_reviews%>
+            <div class="digg_pagination"><% will_paginate @recent_reviews%></div>
             <div style="display: flex;">
                 <%= render partial: 'service/review', object: review, :style => "width: 100%;" %>
                 <button class="btn btn-secondary ms-1 mt-3"><%= link_to review.service.title, service_path(review.service), :class => "dropdown-item" %></button>
