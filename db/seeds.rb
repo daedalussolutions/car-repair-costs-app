@@ -19,6 +19,42 @@ Service.create!([{
     average_price: 609.80
 },
 {
+    title: "Wiper Blades Replacement",
+    minimum_price: 50.00,
+    maximum_price: 60.00,
+    average_price: 55.99
+},
+{
+    title: "Air Filter Replacement",
+    minimum_price: 20.00,
+    maximum_price: 85.00,
+    average_price: 60.20
+},
+{
+    title: "New Tire Installation",
+    minimum_price: 150.00,
+    maximum_price: 300.00,
+    average_price: 220.00
+},
+{
+    title: "Battery Replacement",
+    minimum_price: 45.00,
+    maximum_price: 250.00,
+    average_price: 160.99
+},
+{
+    title: "Wheel Alignment",
+    minimum_price: 100.00,
+    maximum_price: 500.00,
+    average_price: 300.00
+},
+{
+    title: "Wiper Blades Replacement",
+    minimum_price: 289.20,
+    maximum_price: 930.39,
+    average_price: 609.80
+},
+{
     title: "Starter Motor Replacement",
     minimum_price: 199.20,
     maximum_price: 759.30,

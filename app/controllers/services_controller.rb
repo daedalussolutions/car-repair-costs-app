@@ -1,7 +1,7 @@
 class ServicesController < ApplicationController
     protect_from_forgery except: :show
     def index
-        @services = Service.order(:sort)
+        @services = Service.order(:sort).paginate(page: params[:page], per_page: 6)
     end
 
     def service
