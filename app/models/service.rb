@@ -1,4 +1,10 @@
 class Service < ApplicationRecord
+    after_validation :set_slug, only: [:create, :update]
+
+    def to_param
+        "#{id}-#{slug}"
+    end
+    
     has_many :reviews
 
     validates :title, length: { maximum: 50 }, presence: true
