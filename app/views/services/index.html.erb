@@ -1,7 +1,7 @@
 <% if @services.any? %>
   <div class="row">
     <div class="col-md-3">
-      <% @services.each_with_index do |service, index| %>
+      <% @services.each_with_index do |service|%>
         <div class="card option-card p-2 m-4 service-card" style="width: 22rem;" data-index="<%= service.id %>">
           <div class="card-body">
             <h5 class="card-title"><%= service.title %></h5>
