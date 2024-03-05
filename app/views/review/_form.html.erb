@@ -21,6 +21,44 @@
         <%= form.label :price, "Amount Paid: " %>
         <%= form.number_field :price, :class=>"form-control" %>
     </div>
+
+    <div class="form-group" >
+        <%= form.label :service_provider, "Service Provider: " %>
+        <%= select_tag(:service_provider, options_for_select(
+            [['Other'],
+            ['Mr. Lube'],
+            ['Firestone Complete Auto Care'],
+            ['Jiffy Lube'],
+            ['Goodyear Auto Service'],
+            ['Pep Boys'],
+            ['Midas'],
+            ['Meineke Car Care Centers'],
+            ['Valvoline Instant Oil Change'],
+            ['Tire Kingdom'],
+            ['NTB - National Tire & Battery'],
+            ['Monro Auto Service and Tire Centers'],
+            ['AAMCO Transmissions & Total Car Care'],
+            ['Canadian Tire Auto Service Centre'],
+            ['Sears Auto Center'],
+            ['Les Schwab Tire Centers'],
+            ['Discount Tire'],
+            ['Big O Tires'],
+            ['Grease Monkey'],
+            ['Tire Pros'],
+            ["America's Service Station"],
+            ['Precision Tune Auto Care'],
+            ['Tuffy Tire & Auto Service Center'],
+            ['Express Oil Change & Tire Engineers'],
+            ['Christian Brothers Automotive'],
+            ['Kauffman Tire'],
+            ['Honest-1 Auto Care'],
+            ['Take 5 Oil Change'],
+            ['Christian Brothers Automotive'],
+            ['Milex Complete Auto Care/Mr. Transmission'],
+            ['Car-X Tire & Auto']], 32
+        ), {:class=>"form-select"})  %>
+        
+    </div>
     
 
     <div class="form-group">
