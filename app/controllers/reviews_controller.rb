@@ -14,6 +14,7 @@ class ReviewsController < ApplicationController
 
         if @review.save
             @service.calculate_average_price
+            
             redirect_to service_path(@review.service), notice: 'Review posted.'
         else
             puts @review.errors.full_messages
