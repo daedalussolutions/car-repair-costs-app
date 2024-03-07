@@ -1,7 +1,6 @@
 <h6>Leave a review</h6>
 <%= form_for [ @service, @review ] do |form| %>
 
-    <%= form.hidden_field :user_id, value: current_user.id if current_user %>
     <div class="form-group">
         <%= form.label :title, "Summary: " %>
         <%= form.text_field :title, :class=>"form-control" %>
@@ -24,9 +23,9 @@
 
     <div class="form-group" >
         <%= form.label :service_provider, "Service Provider: " %>
-        <%= select_tag(:service_provider, options_for_select(
-            [['Other'],
-            ['Mr. Lube'],
+        <%= form.select(:service_provider, options_for_select(
+            [['Other', selected: true],
+             ['Mr. Lube', 'Mr. Lube'],
             ['Firestone Complete Auto Care'],
             ['Jiffy Lube'],
             ['Goodyear Auto Service'],
@@ -55,8 +54,8 @@
             ['Take 5 Oil Change'],
             ['Christian Brothers Automotive'],
             ['Milex Complete Auto Care/Mr. Transmission'],
-            ['Car-X Tire & Auto']], 32
-        ), {:class=>"form-select"})  %>
+            ['Car-X Tire & Auto']]
+        ), {}, { :class => 'form-select' })%>
         
     </div>
     

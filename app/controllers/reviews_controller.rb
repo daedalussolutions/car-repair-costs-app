@@ -12,16 +12,20 @@ class ReviewsController < ApplicationController
         @review.first_name = current_user.first_name
         @review.last_name = current_user.last_name
 
-        @review.save
+        if @review.save
+            @service.calculate_average_price
+            redirect_to service_path(@review.service), notice: 'Review posted.'
+        else
+            puts @review.errors.full_messages
+            redirect_to service_path(@review.service), notice: @review.errors.full_messages
+        end
 
-        @service.calculate_average_price
-
-        redirect_to service_path(@review.service)
+        
     end 
 
     private
 
     def review_params
-        params.require(:review).permit(:title, :price, :vehicle_make_name, :vehicle_model_name, :vehicle_year_year, :description, :date, :user_id, :first_name, :last_name)
+        params.require(:review).permit(:title, :price, :service_provider, :vehicle_make_name, :vehicle_model_name, :vehicle_year_year, :description, :date, :user_id, :first_name, :last_name)
     end
 end

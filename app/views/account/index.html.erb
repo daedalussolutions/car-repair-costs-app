@@ -1,5 +1,7 @@
 <div class="account-container" style="display: flex; margin: 2% 5%;">
+  
   <div style="margin: 0 5%;">
+    <h3>Hello, <%= current_user.first_name %></h3>
     <button class="btn btn-primary ms-1 mt-3" style="width: 100%"><%= link_to "Edit Password", edit_password_path, :class => "dropdown-item" %></button><br>
     <button class="btn btn-primary ms-1 mt-3" style="width: 100%"><%= link_to "Edit Name", edit_password_path, :class => "dropdown-item" %></button><br>
     <button class="btn btn-primary ms-1 mt-3" style="width: 100%"><%= link_to "Edit Email", edit_password_path, :class => "dropdown-item" %></button>

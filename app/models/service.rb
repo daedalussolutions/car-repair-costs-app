@@ -1,8 +1,8 @@
 class Service < ApplicationRecord
-    after_validation :set_slug, only: [:create, :update]
+    #after_validation :set_slug, only: [:create, :update]
 
     def to_param
-        "#{id}-#{slug}"
+        "#{id}-#{title.parameterize}"
     end
     
     has_many :reviews

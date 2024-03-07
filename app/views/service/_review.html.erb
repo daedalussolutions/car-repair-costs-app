@@ -3,6 +3,7 @@
         <h5 class="card-title"><%= review.title %></h5>
         <h6 class="card-subtitle mb-2 text-muted">Review by <%= review.first_name %> <%= review.last_name %></h6>
         <h6 class="card-subtitle mb-2">Price: $<%= review.price %></h6>
+        <h6 class="card-subtitle mb-2">Service Provider: <%= review.service_provider %></h6>
         <h6 class="card-subtitle mb-2">Vehicle: <%= review.vehicle_year_year %> <%= review.vehicle_make_name %> <%= review.vehicle_model_name %></h6>
         <p class="card-text"><%= review.description %></p>
     </div>
