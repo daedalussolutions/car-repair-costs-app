@@ -21,11 +21,11 @@
       </div>
       
       <% if @reviews.any? %>
-        
+        <%= page_entries_info @reviews %>
         <% @reviews.each do |review| %>
           <%= render partial: 'service/review', locals: { review: review } %>
         <% end %>
-      <%= page_entries_info @reviews %>
+      
       <div class="digg_pagination"><%= will_paginate @reviews %></div>
       <% else %>
         <p>No reviews yet.</p>
