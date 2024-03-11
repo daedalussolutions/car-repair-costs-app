@@ -5,6 +5,6 @@
         <h6 class="card-subtitle mb-2">Price: $<%= review.price %></h6>
         <h6 class="card-subtitle mb-2">Service Provider: <%= review.service_provider %></h6>
         <h6 class="card-subtitle mb-2">Vehicle: <%= review.vehicle_year_year %> <%= review.vehicle_make_name %> <%= review.vehicle_model_name %></h6>
-        <h6 class="card-subtitle mb-2 "><span class="text-muted">Description:</span> <%= truncate(review.description, length: 40) %></h6>
+        <h6 class="card-subtitle mb-2 "><span class="text-muted">Description:</span> <%= truncate(review.description, length: 40) { link_to " See full review", service_path(review.service)} %></h6>
     </div>
 </div>

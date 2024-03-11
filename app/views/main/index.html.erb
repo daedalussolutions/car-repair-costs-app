@@ -22,7 +22,7 @@
         <% @recent_reviews.each do |review| %>
             <% will_paginate @recent_reviews%>
             <div style="display: flex;">
-                <%= render partial: 'service/review', object: review, :style => "width: 100%;" %>
+                <%= render partial: 'shared/review', object: review, :style => "width: 100%;" %>
                 <button class="btn btn-secondary ms-1 mt-3"><%= link_to review.service.title, service_path(review.service), :class => "dropdown-item" %></button>
             </div>
         <% end %>

@@ -12,7 +12,7 @@
           <h3>Reviews</h3>
           <% if service.reviews.any? %>
             <% service.reviews.order(created_at: :desc).limit(3).reverse_each do |review| %>
-                <%= render partial: 'service/review', locals: { review: review } %>
+                <%= render partial: 'shared/review', locals: { review: review } %>
             <% end %>
             <button class="btn btn-primary ms-1 mt-3"><%= link_to "See all reviews", service_path(service), :class => "dropdown-item" %></button>
           <% else %>
