@@ -1,12 +1,14 @@
-<h1>Reset your password</h1>
-
-<%= form_with model: @user, url: password_reset_path do |form| %>
-    <div>
-    <%= form.label :email %>
-    <%= form.email_field :email %>
-    </div>
-
-    <div>
-    <%= form.submit "Reset password" %>
-    </div>
-<% end %>
+<div class="d-flex aligns-items-center justify-content-center card text-center w-25 position-absolute top-50 start-50 translate-middle p-5">
+    <h1>Reset Your Password</h1>
+    
+    <%= form_with model: @user, url: password_reset_path do |form| %>
+        <div>
+            <%= form.label :email, "Email", :class=>"form-label" %>
+            <%= form.email_field :email, :class=>"form-control" %>
+        </div>
+    
+        <div>
+        <%= form.submit "Reset password" , :class=>"btn btn-primary m-3" %>
+        </div>
+    <% end %>
+</div>
