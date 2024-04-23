@@ -5,6 +5,20 @@
         <h6 class="card-subtitle mb-2">Price: $<%= review.price %></h6>
         <h6 class="card-subtitle mb-2">Service Provider: <%= review.service_provider %></h6>
         <h6 class="card-subtitle mb-2">Vehicle: <%= review.vehicle_year_year %> <%= review.vehicle_make_name %> <%= review.vehicle_model_name %></h6>
-        <h6 class="card-subtitle mb-2 "><span class="text-muted">Description:</span> <%= truncate(review.description, length: 40) %></h6>
+        <h6 class="card-subtitle mb-2 ">
+        <% if review.description.present? %>
+            <h6 class="card-subtitle mb-2 ">
+                <span class="text-muted">Description:</span>
+                <% if review.description.length > 180 %>
+                    <div id="review-description-truncated" style="display: inline"><%= truncate(review.description, length: 180)%></div>
+                    <div id="review-description-full" style="display: none"><%= review.description %></div>
+                    <p class="text-muted" id="toggle-description-button" style="display: inline-block; cursor: pointer;">Read More</p>
+                <% else %>
+                    <%= review.description %>
+                <% end %>
+            </h6>
+        <% end %>
     </div>
 </div>
+
+<%= javascript_include_tag 'review_description', 'data-turbo-track': 'reload', defer: true %>

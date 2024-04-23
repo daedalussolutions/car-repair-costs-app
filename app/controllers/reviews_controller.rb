@@ -20,8 +20,6 @@ class ReviewsController < ApplicationController
             puts @review.errors.full_messages
             redirect_to service_path(@review.service), notice: @review.errors.full_messages
         end
-
-        
     end 
 
     private
