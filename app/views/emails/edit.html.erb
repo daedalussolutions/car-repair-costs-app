@@ -1,0 +1,24 @@
+<div class="d-flex aligns-items-center justify-content-center card text-center w-25 position-absolute top-50 start-50 translate-middle p-5">
+    <h1>Change Email</h1>
+    
+    <%= form_with model: current_user, url: email_path do |form| %>
+        <% if form.object.errors.any? %>
+            <% form.object.errors.full_messages.each do |message| %>
+                <div><%= message %></div>
+            <% end %>
+        <% end %>
+    
+                <div class="form-group">
+                    <%= form.label :email, :class=>"form-label" %>
+                    <%= form.email_field :email, :class=>"form-control"%>
+                </div>
+
+                <div>
+                    <%= form.label :password_challenge, "Current Password", :class=>"form-label" %>
+                    <%= form.password_field :password_challenge, :class=>"form-control" %>
+                </div>
+        <div>
+        <%= form.submit "Update Email", :class=>"btn btn-primary m-3" %>
+        </div>
+    <% end %>
+</div>

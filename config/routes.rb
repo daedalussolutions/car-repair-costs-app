@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resource :registration
   resource :password_reset
   resource :password
+  resource :name
+  resource :email
   resources :service do
     resources :reviews
   end
