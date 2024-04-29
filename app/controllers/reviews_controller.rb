@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
         @review.service_id = params[:service_id]
         @service = Service.find_by(id: @review.service_id)
 
-        @review.user_id = 1
+        @review.user_id = current_user.id
         @review.first_name = current_user.first_name
         @review.last_name = current_user.last_name
 
