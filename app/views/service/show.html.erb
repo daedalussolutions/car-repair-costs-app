@@ -1,4 +1,6 @@
-<%= image_tag("garage.jpg", class: "header-image") %>
+<% image_name = File.exist?("app/assets/images/#{@service.title}.jpg") ? "#{@service.title}.jpg" : "garage.jpg"%>
+<%= image_tag(image_name, class: "header-image") %>
+<% puts("Service: ", @service.title)%>
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-8">
