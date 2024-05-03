@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
     validates :first_name, presence: true
     validates :last_name, presence: true
-    validates :email, presence: true
+    validates :email, presence: true, uniqueness: true, on: :create
     normalizes :email, with: -> email { email.downcase.strip }
 
     generates_token_for :password_reset, expires_in: 15.minutes do
