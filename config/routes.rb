@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resource :registration
   resource :password_reset
   resource :password
+  resource :currency
   resource :name
   resource :email
   resources :service do

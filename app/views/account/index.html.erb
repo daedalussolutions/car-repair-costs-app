@@ -2,6 +2,9 @@
   
   <div style="margin: 0 5%;">
     <h3>Hello, <%= current_user.first_name %></h3>
+    <%= form_with model: current_user, url: currency_path do |form| %>
+      <%= form.select(:currency, @currencies) %>
+    <% end %>
     <button class="btn btn-primary ms-1 mt-3" style="width: 100%"><%= link_to "Edit Password", edit_password_path, :class => "dropdown-item" %></button><br>
     <button class="btn btn-primary ms-1 mt-3" style="width: 100%"><%= link_to "Edit Name", edit_name_path, :class => "dropdown-item" %></button><br>
     <button class="btn btn-primary ms-1 mt-3" style="width: 100%"><%= link_to "Edit Email", edit_email_path, :class => "dropdown-item" %></button>
@@ -20,7 +23,5 @@
         <% else %>
           <p>No reviews yet.</p>
         <% end %>
-  
-  
       </div>
 </div>

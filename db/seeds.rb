@@ -110,3 +110,7 @@ vehicle_models_years.each do |make_name, models|
   end
 end
 
+currencies = {
+  "USD", "CAD", "EUR"
+}
+

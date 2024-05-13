@@ -6,6 +6,8 @@ class User < ApplicationRecord
     validates :email, presence: true, uniqueness: true, on: :create
     normalizes :email, with: -> email { email.downcase.strip }
 
+    attribute :currency, :string, default: 'USD'
+
     generates_token_for :password_reset, expires_in: 15.minutes do
         password_salt&.last(10)
     end

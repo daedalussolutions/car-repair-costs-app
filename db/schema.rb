@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_05_154103) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_13_215206) do
+  create_table "currencies", force: :cascade do |t|
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.string "title"
     t.integer "price"
@@ -48,6 +54,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_154103) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
+    t.string "currency"
   end
 
   create_table "vehicle_makes", force: :cascade do |t|
