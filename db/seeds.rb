@@ -61,6 +61,17 @@ Service.create!([{
     average_price: 479.25
 }])
 
+Review.create!([{                         # TODO: Must create many more review seeds. Also create a user that will own all these default reviews.
+  first_name: "Jack",
+  last_name: "Thatcher",
+  title: "Got an oil change at Mr. Lube",
+  price: 99,
+  service_provider: "Mr. Lube",
+  date: Date.today,
+  service: Service.find(1),
+  user_id: 1
+}])
+
 # Seed Vehicle Makes
 vehicle_makes = [
   "Toyota", "Ford", "Chevrolet", "Honda", "Nissan",
@@ -110,7 +121,9 @@ vehicle_models_years.each do |make_name, models|
   end
 end
 
-currencies = {
-  "USD", "CAD", "EUR"
-}
+currencies = [
+  "USD", 
+  "CAD", 
+  "EUR"
+]
 
