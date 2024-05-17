@@ -10,7 +10,7 @@
         </div>
       <% end %>
       <div class="ms-5"><%= page_entries_info @services %></div>
-      <div class="digg_pagination ms-5"><%= will_paginate @services, param: :slug %></div>
+      <div class="digg_pagination ms-5"><%= will_paginate @services, inner_window: 1, outer_window: 0, param: :slug %></div>
     </div>
     <div class="col-md-8">
       <div id="active-service-container">
