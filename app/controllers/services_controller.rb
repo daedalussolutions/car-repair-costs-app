@@ -1,7 +1,12 @@
 class ServicesController < ApplicationController
     protect_from_forgery except: :show
     def index
-        @services = Service.order(:sort).paginate(page: params[:page], per_page: 6)
+        @hide_footer = true
+        if params[:query].present?
+            @services = Service.where("title LIKE?", "%#{params[:query]}%").paginate(page: params[:page], per_page: 6)
+        else
+            @services = Service.order(:sort).paginate(page: params[:page], per_page: 6)
+        end
     end
 
     def service
