@@ -1,7 +1,6 @@
 class ServicesController < ApplicationController
     protect_from_forgery except: :show
     def index
-        @hide_footer = true
         if params[:query].present?
             @services = Service.where("title LIKE?", "%#{params[:query]}%").paginate(page: params[:page], per_page: 6)
         else

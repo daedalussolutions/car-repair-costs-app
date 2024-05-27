@@ -4,7 +4,6 @@ class ServiceController < ApplicationController
     end
 
     def show 
-        @hide_footer = true
         @service = Service.find(params[:id])
         @review = @service.reviews.build
         @reviews = @service.reviews.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
