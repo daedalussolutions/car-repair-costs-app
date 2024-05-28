@@ -7,12 +7,68 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-#User.create!([{
-#    first_name: "admin",
-#    last_name: "admin",
-#    password: "password",
-#    email: "admin@wrenchportal.com"          Uncomment this to add back the admin user.
-#}])
+User.create!([{
+    first_name: "admin",
+    last_name: "admin",
+    password: "password",
+    email: "admin@wrenchportal.com" 
+}])
+
+# Seed Vehicle Makes
+currencies = [
+  "USD", 
+  "CAD", 
+  "EUR"
+]
+
+vehicle_makes = [
+  "Toyota", "Ford", "Chevrolet", "Honda", "Nissan",
+  "Jeep", "Subaru", "BMW", "Mercedes-Benz", "GMC",
+  "Ram", "Hyundai", "Lexus", "Volkswagen", "Audi",
+  "Kia", "Mazda", "Volvo", "Tesla", "Porsche",
+  "Cadillac", "Buick", "Acura", "Infiniti", "Chrysler",
+  "Lincoln", "Land Rover", "Jaguar", "Dodge", "Mitsubishi",
+  "Mini", "Fiat", "Alfa Romeo", "Genesis", "Bentley",
+  "Maserati", "Ferrari", "Lamborghini", "Rolls-Royce", "McLaren",
+  "Bugatti", "Lotus", "Aston Martin", "Smart", "Maybach",
+  "Koenigsegg", "Pagani", "Spyker", "Hennessey", "Vector",
+  "Saleen", "Shelby", "Lancia", "Dacia", "Tata",
+  "Citroen", "Peugeot", "Renault", "Saab", "Opel",
+  "Seat", "Skoda", "Fiat", "Daihatsu", "Suzuki",
+  "Proton", "Perodua", "Isuzu", "Hino", "Scion",
+  "Daewoo", "Geely", "Chery", "Great Wall", "Brilliance",
+  "Dongfeng", "Zotye", "JAC", "Changan", "BAIC",
+  "BYD", "Wuling", "Mahindra", "Tata", "Maruti Suzuki",
+  "Force", "Premier", "Hindustan", "Eicher", "Ashok Leyland"
+]
+
+vehicle_makes.each do |make_name|
+  VehicleMake.create(name: make_name)
+end
+
+# Seed Vehicle Models and Years
+vehicle_models_years = {
+  "Toyota" => ["Camry", "Corolla", "RAV4", "Highlander", "Tacoma", "4Runner", "Sienna", "Prius"],
+  "Ford" => ["F-150", "Escape", "Explorer", "Focus", "Mustang", "Fusion", "Edge", "Expedition"],
+  "Chevrolet" => ["Silverado 1500", "Equinox", "Tahoe", "Suburban", "Traverse", "Malibu", "Camaro", "Colorado"],
+  "Honda" => ["Civic", "Accord", "CR-V", "Pilot", "Odyssey", "HR-V", "Fit", "Ridgeline"],
+  "Nissan" => ["Rogue", "Altima", "Sentra", "Frontier", "Pathfinder", "Versa", "Maxima", "Titan"],
+  "Jeep" => ["Wrangler", "Grand Cherokee", "Cherokee", "Compass", "Renegade", "Gladiator", "Wrangler Unlimited", "Liberty"],
+  "Subaru" => ["Outback", "Forester", "Crosstrek", "Impreza", "Legacy", "WRX", "Ascent", "BRZ"],
+  "BMW" => ["3 Series", "5 Series", "X3", "X5", "X1", "4 Series", "X7", "7 Series"],
+  # Add more models for other makes as required
+}
+
+vehicle_models_years.each do |make_name, models|
+  make = VehicleMake.find_by(name: make_name)
+  models.each do |model_name|
+    vehicle_model = make.vehicle_models.create(name: model_name)
+    (1980..2023).each do |year|
+        vehicle_model.vehicle_years.create(year: year)
+    end
+  end
+end
+
 Service.create!([{
     title: "Oil Change",
     minimum_price: 35.45,
@@ -66,71 +122,929 @@ Service.create!([{
     minimum_price: 199.20,
     maximum_price: 759.30,
     average_price: 479.25
-}])
+},
+{
+    title: "Add Antifreeze",
+    minimum_price: 19,
+    maximum_price: 45,
+    average_price: 32
+},
+{
+    title: "Replace Spark Plugs",
+    minimum_price: 165.54,
+    maximum_price: 457.85,
+    average_price: 311.70
+},
+{
+    title: "Fuel System Cleaning",
+    minimum_price: 165.54,
+    maximum_price: 457.85,
+    average_price: 311.70
+},
+{
+    title: "Tire Rotation",
+    minimum_price: 40,
+    maximum_price: 100,
+    average_price: 70
+},
+{
+    title: "Vehicle Wax",
+    minimum_price: 56,
+    maximum_price: 340,
+    average_price: 198
+}
+])
 
-Review.create!([{                         # TODO: Must create many more review seeds. Also create a user that will own all these default reviews.
+Review.create!([{
   first_name: "Jack",
   last_name: "Thatcher",
   title: "Got an oil change at Mr. Lube",
+  vehicle_make_name: 'Ford',
+  vehicle_model_name: 'Focus',
+  vehicle_year_year: '2014',
   price: 99,
   service_provider: "Mr. Lube",
+  description: "Quick and efficient service. Very satisfied.",
   date: Date.today,
   service: Service.find(1),
   user_id: 1
+},
+{
+  first_name: "Anna",
+  last_name: "Smith",
+  title: "Brake replacement at AutoFix",
+  vehicle_make_name: 'Toyota',
+  vehicle_model_name: 'Camry',
+  vehicle_year_year: '2017',
+  price: 620,
+  service_provider: "AutoFix",
+  description: "The brakes were replaced smoothly, and the car feels much safer now.",
+  date: Date.today,
+  service: Service.find(2),
+  user_id: 1
+},
+{
+  first_name: "David",
+  last_name: "Johnson",
+  title: "Wiper blades replaced at QuickService",
+  vehicle_make_name: 'Honda',
+  vehicle_model_name: 'Civic',
+  vehicle_year_year: '2018',
+  price: 58,
+  service_provider: "QuickService",
+  date: Date.today,
+  service: Service.find(3),
+  user_id: 1
+},
+{
+  first_name: "Emily",
+  last_name: "Brown",
+  title: "Air filter replacement at SpeedyAuto",
+  vehicle_make_name: 'Nissan',
+  vehicle_model_name: 'Altima',
+  vehicle_year_year: '2015',
+  price: 65,
+  service_provider: "SpeedyAuto",
+  description: "Noticed a significant improvement in air quality after the replacement.",
+  date: Date.today,
+  service: Service.find(4),
+  user_id: 1
+},
+{
+  first_name: "Michael",
+  last_name: "Lee",
+  title: "New tire installation at TireMart",
+  vehicle_make_name: 'Chevrolet',
+  vehicle_model_name: 'Malibu',
+  vehicle_year_year: '2016',
+  price: 250,
+  service_provider: "TireMart",
+  date: Date.today,
+  service: Service.find(5),
+  user_id: 1
+},
+{
+  first_name: "Sarah",
+  last_name: "Wilson",
+  title: "Battery replacement at CarCare",
+  vehicle_make_name: 'Hyundai',
+  vehicle_model_name: 'Elantra',
+  vehicle_year_year: '2019',
+  price: 175,
+  service_provider: "CarCare",
+  date: Date.today,
+  service: Service.find(6),
+  user_id: 1
+},
+{
+  first_name: "James",
+  last_name: "Moore",
+  title: "Wheel alignment at AlignPro",
+  vehicle_make_name: 'Kia',
+  vehicle_model_name: 'Sorento',
+  vehicle_year_year: '2020',
+  price: 320,
+  service_provider: "AlignPro",
+  description: "Alignment feels perfect now. Great job by AlignPro!",
+  date: Date.today,
+  service: Service.find(7),
+  user_id: 1
+},
+{
+  first_name: "Jessica",
+  last_name: "Davis",
+  title: "Wiper blades replacement at QuickFix",
+  vehicle_make_name: 'Volkswagen',
+  vehicle_model_name: 'Jetta',
+  vehicle_year_year: '2013',
+  price: 55,
+  service_provider: "QuickFix",
+  date: Date.today,
+  service: Service.find(3),
+  user_id: 1
+},
+{
+  first_name: "Daniel",
+  last_name: "Garcia",
+  title: "Starter motor replacement at MotorWorks",
+  vehicle_make_name: 'BMW',
+  vehicle_model_name: 'X5',
+  vehicle_year_year: '2012',
+  price: 500,
+  service_provider: "MotorWorks",
+  description: "The car starts without any issues now. Highly recommend MotorWorks.",
+  date: Date.today,
+  service: Service.find(9),
+  user_id: 1
+},
+{
+  first_name: "Laura",
+  last_name: "Martinez",
+  title: "Added antifreeze at CoolAuto",
+  vehicle_make_name: 'Audi',
+  vehicle_model_name: 'A4',
+  vehicle_year_year: '2018',
+  price: 35,
+  service_provider: "CoolAuto",
+  date: Date.today,
+  service: Service.find(10),
+  user_id: 1
+},
+{
+  first_name: "John",
+  last_name: "Hernandez",
+  title: "Spark plugs replaced at SparkMaster",
+  vehicle_make_name: 'Mazda',
+  vehicle_model_name: '3',
+  vehicle_year_year: '2015',
+  price: 330,
+  service_provider: "SparkMaster",
+  description: "The engine runs smoother now. SparkMaster did a great job.",
+  date: Date.today,
+  service: Service.find(11),
+  user_id: 1
+},
+{
+  first_name: "Olivia",
+  last_name: "Taylor",
+  title: "Fuel system cleaning at FuelFix",
+  vehicle_make_name: 'Ford',
+  vehicle_model_name: 'Explorer',
+  vehicle_year_year: '2017',
+  price: 325,
+  service_provider: "FuelFix",
+  date: Date.today,
+  service: Service.find(12),
+  user_id: 1
+},
+{
+  first_name: "Sophia",
+  last_name: "Anderson",
+  title: "Tire rotation at TirePro",
+  vehicle_make_name: 'Jeep',
+  vehicle_model_name: 'Wrangler',
+  vehicle_year_year: '2021',
+  price: 75,
+  service_provider: "TirePro",
+  description: "Quick service and friendly staff. Will return for future services.",
+  date: Date.today,
+  service: Service.find(13),
+  user_id: 1
+},
+{
+  first_name: "Christopher",
+  last_name: "Thomas",
+  title: "Vehicle wax at ShineAuto",
+  vehicle_make_name: 'Subaru',
+  vehicle_model_name: 'Outback',
+  vehicle_year_year: '2019',
+  price: 210,
+  service_provider: "ShineAuto",
+  date: Date.today,
+  service: Service.find(14),
+  user_id: 1
+},
+{
+  first_name: "Ava",
+  last_name: "Jackson",
+  title: "Oil change at SpeedyLube",
+  vehicle_make_name: 'Honda',
+  vehicle_model_name: 'Accord',
+  vehicle_year_year: '2020',
+  price: 90,
+  service_provider: "SpeedyLube",
+  date: Date.today,
+  service: Service.find(1),
+  user_id: 1
+},
+{
+  first_name: "Mia",
+  last_name: "White",
+  title: "Brake replacement at BrakeMasters",
+  vehicle_make_name: 'Toyota',
+  vehicle_model_name: 'Highlander',
+  vehicle_year_year: '2016',
+  price: 650,
+  service_provider: "BrakeMasters",
+  description: "Brakes are working perfectly now. BrakeMasters did an excellent job.",
+  date: Date.today,
+  service: Service.find(2),
+  user_id: 1
+},
+{
+  first_name: "Ethan",
+  last_name: "Harris",
+  title: "Wiper blades replacement at AutoFix",
+  vehicle_make_name: 'Ford',
+  vehicle_model_name: 'Fusion',
+  vehicle_year_year: '2014',
+  price: 57,
+  service_provider: "AutoFix",
+  date: Date.today,
+  service: Service.find(3),
+  user_id: 1
+},
+{
+  first_name: "Isabella",
+  last_name: "Clark",
+  title: "Air filter replacement at CleanAir",
+  vehicle_make_name: 'Chevrolet',
+  vehicle_model_name: 'Cruze',
+  vehicle_year_year: '2015',
+  price: 70,
+  service_provider: "CleanAir",
+  description: "CleanAir provided excellent service. The car runs smoother now.",
+  date: Date.today,
+  service: Service.find(4),
+  user_id: 1
+},
+{
+  first_name: "Liam",
+  last_name: "Robinson",
+  title: "New tire installation at TirePro",
+  vehicle_make_name: 'Nissan',
+  vehicle_model_name: 'Rogue',
+  vehicle_year_year: '2018',
+  price: 280,
+  service_provider: "TirePro",
+  date: Date.today,
+  service: Service.find(5),
+  user_id: 1
+},
+{
+  first_name: "Lucas",
+  last_name: "Walker",
+  title: "Battery replacement at AutoCare",
+  vehicle_make_name: 'Hyundai',
+  vehicle_model_name: 'Tucson',
+  vehicle_year_year: '2019',
+  price: 160,
+  service_provider: "AutoCare",
+  date: Date.today,
+  service: Service.find(6),
+  user_id: 1
+},
+{
+  first_name: "Mason",
+  last_name: "Perez",
+  title: "Wheel alignment at WheelWorks",
+  vehicle_make_name: 'Mazda',
+  vehicle_model_name: 'CX-5',
+  vehicle_year_year: '2020',
+  price: 305,
+  service_provider: "WheelWorks",
+  date: Date.today,
+  service: Service.find(7),
+  user_id: 1
+},
+{
+  first_name: "Charlotte",
+  last_name: "Hall",
+  title: "Starter motor replacement at StarterSpecialists",
+  vehicle_make_name: 'BMW',
+  vehicle_model_name: '3 Series',
+  vehicle_year_year: '2017',
+  price: 480,
+  service_provider: "StarterSpecialists",
+  date: Date.today,
+  service: Service.find(9),
+  user_id: 1
+},
+{
+  first_name: "Benjamin",
+  last_name: "Young",
+  title: "Added antifreeze at CoolantPlus",
+  vehicle_make_name: 'Audi',
+  vehicle_model_name: 'Q5',
+  vehicle_year_year: '2016',
+  price: 40,
+  service_provider: "CoolantPlus",
+  description: "Great service at CoolantPlus. The car is running smoothly now.",
+  date: Date.today,
+  service: Service.find(10),
+  user_id: 1
+},
+{
+  first_name: "Henry",
+  last_name: "Allen",
+  title: "Spark plugs replaced at SparkPro",
+  vehicle_make_name: 'Ford',
+  vehicle_model_name: 'Escape',
+  vehicle_year_year: '2014',
+  price: 315,
+  service_provider: "SparkPro",
+  date: Date.today,
+  service: Service.find(11),
+  user_id: 1
+},
+{
+  first_name: "Amelia",
+  last_name: "King",
+  title: "Fuel system cleaning at FuelClear",
+  vehicle_make_name: 'Chevrolet',
+  vehicle_model_name: 'Equinox',
+  vehicle_year_year: '2018',
+  price: 310,
+  service_provider: "FuelClear",
+  date: Date.today,
+  service: Service.find(12),
+  user_id: 1
+},
+{
+  first_name: "Alexander",
+  last_name: "Wright",
+  title: "Tire rotation at RotateRight",
+  vehicle_make_name: 'Jeep',
+  vehicle_model_name: 'Grand Cherokee',
+  vehicle_year_year: '2017',
+  price: 72,
+  service_provider: "RotateRight",
+  date: Date.today,
+  service: Service.find(13),
+  user_id: 1
+},
+{
+  first_name: "Aiden",
+  last_name: "Lopez",
+  title: "Vehicle wax at WaxOn",
+  vehicle_make_name: 'Subaru',
+  vehicle_model_name: 'Forester',
+  vehicle_year_year: '2019',
+  price: 205,
+  service_provider: "WaxOn",
+  description: "The car looks brand new after the wax. Fantastic job by WaxOn.",
+  date: Date.today,
+  service: Service.find(14),
+  user_id: 1
+},
+{
+  first_name: "Matthew",
+  last_name: "Clark",
+  title: "Oil change at QuickOil",
+  vehicle_make_name: 'Honda',
+  vehicle_model_name: 'Civic',
+  vehicle_year_year: '2015',
+  price: 85,
+  service_provider: "QuickOil",
+  description: "Good service but a bit pricey.",
+  date: Date.today,
+  service: Service.find(1),
+  user_id: 1
+},
+{
+  first_name: "Emma",
+  last_name: "Rodriguez",
+  title: "Brake replacement at SpeedyBrakes",
+  vehicle_make_name: 'Toyota',
+  vehicle_model_name: 'Corolla',
+  vehicle_year_year: '2016',
+  price: 600,
+  service_provider: "SpeedyBrakes",
+  description: "Excellent service and friendly staff.",
+  date: Date.today,
+  service: Service.find(2),
+  user_id: 1
+},
+{
+  first_name: "Noah",
+  last_name: "Martinez",
+  title: "Wiper blades replaced at AutoExpress",
+  vehicle_make_name: 'Ford',
+  vehicle_model_name: 'Fiesta',
+  vehicle_year_year: '2017',
+  price: 60,
+  service_provider: "AutoExpress",
+  description: "Quick and efficient service.",
+  date: Date.today,
+  service: Service.find(3),
+  user_id: 1
+},
+{
+  first_name: "Olivia",
+  last_name: "Walker",
+  title: "Air filter replacement at FreshAir",
+  vehicle_make_name: 'Chevrolet',
+  vehicle_model_name: 'Impala',
+  vehicle_year_year: '2018',
+  price: 55,
+  service_provider: "FreshAir",
+  date: Date.today,
+  service: Service.find(4),
+  user_id: 1
+},
+{
+  first_name: "Liam",
+  last_name: "Gonzalez",
+  title: "New tire installation at TireDepot",
+  vehicle_make_name: 'Mazda',
+  vehicle_model_name: 'CX-3',
+  vehicle_year_year: '2019',
+  price: 275,
+  service_provider: "TireDepot",
+  description: "Tires were installed quickly and correctly.",
+  date: Date.today,
+  service: Service.find(5),
+  user_id: 1
+},
+{
+  first_name: "Ava",
+  last_name: "Harris",
+  title: "Battery replacement at BatteryPlus",
+  vehicle_make_name: 'Hyundai',
+  vehicle_model_name: 'Sonata',
+  vehicle_year_year: '2014',
+  price: 180,
+  service_provider: "BatteryPlus",
+  date: Date.today,
+  service: Service.find(6),
+  user_id: 1
+},
+{
+  first_name: "Sophia",
+  last_name: "Nelson",
+  title: "Wheel alignment at AlignRight",
+  vehicle_make_name: 'Kia',
+  vehicle_model_name: 'Sportage',
+  vehicle_year_year: '2020',
+  price: 310,
+  service_provider: "AlignRight",
+  description: "The alignment was spot on. Great job!",
+  date: Date.today,
+  service: Service.find(7),
+  user_id: 1
+},
+{
+  first_name: "William",
+  last_name: "Moore",
+  title: "Starter motor replacement at StarterWorld",
+  vehicle_make_name: 'BMW',
+  vehicle_model_name: '5 Series',
+  vehicle_year_year: '2015',
+  price: 520,
+  service_provider: "StarterWorld",
+  date: Date.today,
+  service: Service.find(9),
+  user_id: 1
+},
+{
+  first_name: "Isabella",
+  last_name: "Perez",
+  title: "Added antifreeze at CoolRun",
+  vehicle_make_name: 'Audi',
+  vehicle_model_name: 'Q7',
+  vehicle_year_year: '2017',
+  price: 30,
+  service_provider: "CoolRun",
+  date: Date.today,
+  service: Service.find(10),
+  user_id: 1
+},
+{
+  first_name: "James",
+  last_name: "Thompson",
+  title: "Spark plugs replaced at SparkAuto",
+  vehicle_make_name: 'Subaru',
+  vehicle_model_name: 'Legacy',
+  vehicle_year_year: '2016',
+  price: 340,
+  service_provider: "SparkAuto",
+  description: "Spark plugs were replaced quickly. Great service!",
+  date: Date.today,
+  service: Service.find(11),
+  user_id: 1
+},
+{
+  first_name: "Mia",
+  last_name: "White",
+  title: "Fuel system cleaning at FuelCare",
+  vehicle_make_name: 'Nissan',
+  vehicle_model_name: 'Altima',
+  vehicle_year_year: '2018',
+  price: 315,
+  service_provider: "FuelCare",
+  date: Date.today,
+  service: Service.find(12),
+  user_id: 1
+},
+{
+  first_name: "Lucas",
+  last_name: "Hall",
+  title: "Tire rotation at RotatePro",
+  vehicle_make_name: 'Volkswagen',
+  vehicle_model_name: 'Passat',
+  vehicle_year_year: '2019',
+  price: 70,
+  service_provider: "RotatePro",
+  description: "Rotation was done quickly but they didn't reset the tire pressure sensors.",
+  date: Date.today,
+  service: Service.find(13),
+  user_id: 1
+},
+{
+  first_name: "Amelia",
+  last_name: "Green",
+  title: "Vehicle wax at ShinePro",
+  vehicle_make_name: 'Honda',
+  vehicle_model_name: 'CR-V',
+  vehicle_year_year: '2020',
+  price: 200,
+  service_provider: "ShinePro",
+  description: "The car looks fantastic after the wax. Very happy with the service.",
+  date: Date.today,
+  service: Service.find(14),
+  user_id: 1
+},
+{
+  first_name: "Henry",
+  last_name: "Adams",
+  title: "Oil change at SpeedyLube",
+  vehicle_make_name: 'Hyundai',
+  vehicle_model_name: 'Elantra',
+  vehicle_year_year: '2015',
+  price: 80,
+  service_provider: "SpeedyLube",
+  date: Date.today,
+  service: Service.find(1),
+  user_id: 1
+},
+{
+  first_name: "Evelyn",
+  last_name: "Scott",
+  title: "Brake replacement at BrakeMasters",
+  vehicle_make_name: 'Toyota',
+  vehicle_model_name: 'Highlander',
+  vehicle_year_year: '2016',
+  price: 640,
+  service_provider: "BrakeMasters",
+  description: "Brakes are working perfectly now. Excellent job by BrakeMasters.",
+  date: Date.today,
+  service: Service.find(2),
+  user_id: 1
+},
+{
+  first_name: "Daniel",
+  last_name: "Cooper",
+  title: "Wiper blades replacement at AutoFix",
+  vehicle_make_name: 'Ford',
+  vehicle_model_name: 'Fusion',
+  vehicle_year_year: '2014',
+  price: 55,
+  service_provider: "AutoFix",
+  date: Date.today,
+  service: Service.find(3),
+  user_id: 1
+},
+{
+  first_name: "Harper",
+  last_name: "Rivera",
+  title: "Air filter replacement at CleanAir",
+  vehicle_make_name: 'Chevrolet',
+  vehicle_model_name: 'Cruze',
+  vehicle_year_year: '2015',
+  price: 70,
+  service_provider: "CleanAir",
+  description: "CleanAir provided excellent service. The car runs smoother now.",
+  date: Date.today,
+  service: Service.find(4),
+  user_id: 1
+},
+{
+  first_name: "Elijah",
+  last_name: "Phillips",
+  title: "New tire installation at TirePro",
+  vehicle_make_name: 'Nissan',
+  vehicle_model_name: 'Rogue',
+  vehicle_year_year: '2018',
+  price: 280,
+  service_provider: "TirePro",
+  date: Date.today,
+  service: Service.find(5),
+  user_id: 1
+},
+{
+  first_name: "Sebastian",
+  last_name: "Campbell",
+  title: "Battery replacement at AutoCare",
+  vehicle_make_name: 'Hyundai',
+  vehicle_model_name: 'Tucson',
+  vehicle_year_year: '2019',
+  price: 160,
+  service_provider: "AutoCare",
+  description: "Battery was replaced but they took too long.",
+  date: Date.today,
+  service: Service.find(6),
+  user_id: 1
+},
+{
+  first_name: "Madison",
+  last_name: "Mitchell",
+  title: "Wheel alignment at WheelWorks",
+  vehicle_make_name: 'Mazda',
+  vehicle_model_name: 'CX-5',
+  vehicle_year_year: '2020',
+  price: 305,
+  service_provider: "WheelWorks",
+  date: Date.today,
+  service: Service.find(7),
+  user_id: 1
+},
+{
+  first_name: "Carter",
+  last_name: "Roberts",
+  title: "Starter motor replacement at StarterSpecialists",
+  vehicle_make_name: 'BMW',
+  vehicle_model_name: '3 Series',
+  vehicle_year_year: '2017',
+  price: 480,
+  service_provider: "StarterSpecialists",
+  date: Date.today,
+  service: Service.find(9),
+  user_id: 1
+},
+{
+  first_name: "Grace",
+  last_name: "Turner",
+  title: "Added antifreeze at CoolantPlus",
+  vehicle_make_name: 'Audi',
+  vehicle_model_name: 'Q5',
+  vehicle_year_year: '2016',
+  price: 40,
+  service_provider: "CoolantPlus",
+  description: "Great service at CoolantPlus. The car is running smoothly now.",
+  date: Date.today,
+  service: Service.find(10),
+  user_id: 1
+},
+{
+  first_name: "Chloe",
+  last_name: "Stewart",
+  title: "Spark plugs replaced at SparkPro",
+  vehicle_make_name: 'Ford',
+  vehicle_model_name: 'Escape',
+  vehicle_year_year: '2014',
+  price: 315,
+  service_provider: "SparkPro",
+  date: Date.today,
+  service: Service.find(11),
+  user_id: 1
+},
+{
+  first_name: "Jackson",
+  last_name: "Morris",
+  title: "Fuel system cleaning at FuelClear",
+  vehicle_make_name: 'Chevrolet',
+  vehicle_model_name: 'Equinox',
+  vehicle_year_year: '2018',
+  price: 310,
+  service_provider: "FuelClear",
+  description: "Service was okay but quite expensive.",
+  date: Date.today,
+  service: Service.find(12),
+  user_id: 1
+},
+{
+  first_name: "Ella",
+  last_name: "Collins",
+  title: "Tire rotation at RotateRight",
+  vehicle_make_name: 'Jeep',
+  vehicle_model_name: 'Grand Cherokee',
+  vehicle_year_year: '2017',
+  price: 72,
+  service_provider: "RotateRight",
+  description: "Rotation was done quickly but they didn't reset the tire pressure sensors.",
+  date: Date.today,
+  service: Service.find(13),
+  user_id: 1
+},
+{
+  first_name: "Samuel",
+  last_name: "Bell",
+  title: "Vehicle wax at WaxOn",
+  vehicle_make_name: 'Subaru',
+  vehicle_model_name: 'Forester',
+  vehicle_year_year: '2019',
+  price: 205,
+  service_provider: "WaxOn",
+  description: "The car looks brand new after the wax. Fantastic job by WaxOn.",
+  date: Date.today,
+  service: Service.find(14),
+  user_id: 1
+},
+{
+  first_name: "Sofia",
+  last_name: "Murphy",
+  title: "Oil change at QuickChange",
+  vehicle_make_name: 'Toyota',
+  vehicle_model_name: 'Camry',
+  vehicle_year_year: '2021',
+  price: 95,
+  service_provider: "QuickChange",
+  description: "Service was fast but the waiting area was not clean.",
+  date: Date.today,
+  service: Service.find(1),
+  user_id: 1
+},
+{
+  first_name: "Zoe",
+  last_name: "Bailey",
+  title: "Brake replacement at BrakeExperts",
+  vehicle_make_name: 'Honda',
+  vehicle_model_name: 'Pilot',
+  vehicle_year_year: '2018',
+  price: 680,
+  service_provider: "BrakeExperts",
+  description: "The brakes work well now but it took longer than expected.",
+  date: Date.today,
+  service: Service.find(2),
+  user_id: 1
+},
+{
+  first_name: "Levi",
+  last_name: "Parker",
+  title: "Wiper blades replacement at FastFix",
+  vehicle_make_name: 'Ford',
+  vehicle_model_name: 'Mustang',
+  vehicle_year_year: '2017',
+  price: 65,
+  service_provider: "FastFix",
+  date: Date.today,
+  service: Service.find(3),
+  user_id: 1
+},
+{
+  first_name: "Lillian",
+  last_name: "Edwards",
+  title: "Air filter replacement at FreshAir",
+  vehicle_make_name: 'Chevrolet',
+  vehicle_model_name: 'Tahoe',
+  vehicle_year_year: '2016',
+  price: 75,
+  service_provider: "FreshAir",
+  date: Date.today,
+  service: Service.find(4),
+  user_id: 1
+},
+{
+  first_name: "Isaac",
+  last_name: "Cruz",
+  title: "New tire installation at BestTires",
+  vehicle_make_name: 'Nissan',
+  vehicle_model_name: 'Murano',
+  vehicle_year_year: '2019',
+  price: 290,
+  service_provider: "BestTires",
+  date: Date.today,
+  service: Service.find(5),
+  user_id: 1
+},
+{
+  first_name: "Victoria",
+  last_name: "Rogers",
+  title: "Battery replacement at QuickBattery",
+  vehicle_make_name: 'Hyundai',
+  vehicle_model_name: 'Santa Fe',
+  vehicle_year_year: '2020',
+  price: 175,
+  service_provider: "QuickBattery",
+  description: "Battery was replaced but I had to wait too long.",
+  date: Date.today,
+  service: Service.find(6),
+  user_id: 1
+},
+{
+  first_name: "Aaron",
+  last_name: "Reed",
+  title: "Wheel alignment at PrecisionAlign",
+  vehicle_make_name: 'Mazda',
+  vehicle_model_name: 'Mazda6',
+  vehicle_year_year: '2021',
+  price: 320,
+  service_provider: "PrecisionAlign",
+  date: Date.today,
+  service: Service.find(7),
+  user_id: 1
+},
+{
+  first_name: "Aria",
+  last_name: "Cook",
+  title: "Starter motor replacement at StarterTech",
+  vehicle_make_name: 'BMW',
+  vehicle_model_name: 'X3',
+  vehicle_year_year: '2016',
+  price: 490,
+  service_provider: "StarterTech",
+  date: Date.today,
+  service: Service.find(9),
+  user_id: 1
+},
+{
+  first_name: "Leo",
+  last_name: "Morgan",
+  title: "Added antifreeze at CoolantExperts",
+  vehicle_make_name: 'Audi',
+  vehicle_model_name: 'A6',
+  vehicle_year_year: '2015',
+  price: 45,
+  service_provider: "CoolantExperts",
+  description: "Good service but they overcharged me.",
+  date: Date.today,
+  service: Service.find(10),
+  user_id: 1
+},
+{
+  first_name: "Luna",
+  last_name: "Kelly",
+  title: "Spark plugs replaced at SparkTech",
+  vehicle_make_name: 'Ford',
+  vehicle_model_name: 'Explorer',
+  vehicle_year_year: '2017',
+  price: 320,
+  service_provider: "SparkTech",
+  date: Date.today,
+  service: Service.find(11),
+  user_id: 1
+},
+{
+  first_name: "Jack",
+  last_name: "Howard",
+  title: "Fuel system cleaning at FuelWorks",
+  vehicle_make_name: 'Chevrolet',
+  vehicle_model_name: 'Blazer',
+  vehicle_year_year: '2018',
+  price: 305,
+  service_provider: "FuelWorks",
+  description: "Service was okay but a bit expensive.",
+  date: Date.today,
+  service: Service.find(12),
+  user_id: 1
+},
+{
+  first_name: "Violet",
+  last_name: "Ward",
+  title: "Tire rotation at TireRotate",
+  vehicle_make_name: 'Jeep',
+  vehicle_model_name: 'Compass',
+  vehicle_year_year: '2019',
+  price: 75,
+  service_provider: "TireRotate",
+  description: "Rotation was done but they scratched my rim.",
+  date: Date.today,
+  service: Service.find(13),
+  user_id: 1
+},
+{
+  first_name: "Aubrey",
+  last_name: "Brooks",
+  title: "Vehicle wax at WaxWorks",
+  vehicle_make_name: 'Subaru',
+  vehicle_model_name: 'Impreza',
+  vehicle_year_year: '2016',
+  price: 215,
+  service_provider: "WaxWorks",
+  description: "The car looks great but they missed a spot on the hood.",
+  date: Date.today,
+  service: Service.find(14),
+  user_id: 1
 }])
 
-# Seed Vehicle Makes
-vehicle_makes = [
-  "Toyota", "Ford", "Chevrolet", "Honda", "Nissan",
-  "Jeep", "Subaru", "BMW", "Mercedes-Benz", "GMC",
-  "Ram", "Hyundai", "Lexus", "Volkswagen", "Audi",
-  "Kia", "Mazda", "Volvo", "Tesla", "Porsche",
-  "Cadillac", "Buick", "Acura", "Infiniti", "Chrysler",
-  "Lincoln", "Land Rover", "Jaguar", "Dodge", "Mitsubishi",
-  "Mini", "Fiat", "Alfa Romeo", "Genesis", "Bentley",
-  "Maserati", "Ferrari", "Lamborghini", "Rolls-Royce", "McLaren",
-  "Bugatti", "Lotus", "Aston Martin", "Smart", "Maybach",
-  "Koenigsegg", "Pagani", "Spyker", "Hennessey", "Vector",
-  "Saleen", "Shelby", "Lancia", "Dacia", "Tata",
-  "Citroen", "Peugeot", "Renault", "Saab", "Opel",
-  "Seat", "Skoda", "Fiat", "Daihatsu", "Suzuki",
-  "Proton", "Perodua", "Isuzu", "Hino", "Scion",
-  "Daewoo", "Geely", "Chery", "Great Wall", "Brilliance",
-  "Dongfeng", "Zotye", "JAC", "Changan", "BAIC",
-  "BYD", "Wuling", "Mahindra", "Tata", "Maruti Suzuki",
-  "Force", "Premier", "Hindustan", "Eicher", "Ashok Leyland"
-]
-
-vehicle_makes.each do |make_name|
-  VehicleMake.create(name: make_name)
-end
-
-# Seed Vehicle Models and Years
-vehicle_models_years = {
-  "Toyota" => ["Camry", "Corolla", "RAV4", "Highlander", "Tacoma", "4Runner", "Sienna", "Prius"],
-  "Ford" => ["F-150", "Escape", "Explorer", "Focus", "Mustang", "Fusion", "Edge", "Expedition"],
-  "Chevrolet" => ["Silverado 1500", "Equinox", "Tahoe", "Suburban", "Traverse", "Malibu", "Camaro", "Colorado"],
-  "Honda" => ["Civic", "Accord", "CR-V", "Pilot", "Odyssey", "HR-V", "Fit", "Ridgeline"],
-  "Nissan" => ["Rogue", "Altima", "Sentra", "Frontier", "Pathfinder", "Versa", "Maxima", "Titan"],
-  "Jeep" => ["Wrangler", "Grand Cherokee", "Cherokee", "Compass", "Renegade", "Gladiator", "Wrangler Unlimited", "Liberty"],
-  "Subaru" => ["Outback", "Forester", "Crosstrek", "Impreza", "Legacy", "WRX", "Ascent", "BRZ"],
-  "BMW" => ["3 Series", "5 Series", "X3", "X5", "X1", "4 Series", "X7", "7 Series"],
-  # Add more models for other makes as required
-}
-
-vehicle_models_years.each do |make_name, models|
-  make = VehicleMake.find_by(name: make_name)
-  models.each do |model_name|
-    vehicle_model = make.vehicle_models.create(name: model_name)
-    (1980..2023).each do |year|
-        vehicle_model.vehicle_years.create(year: year)
-    end
-  end
-end
-
-currencies = [
-  "USD", 
-  "CAD", 
-  "EUR"
-]
 
