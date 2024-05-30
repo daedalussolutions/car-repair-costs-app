@@ -20,15 +20,23 @@
           </li>
         <% end %>
       </ul>
+      <%= form_with model: current_user, url: currency_path, html: { id: 'currency-form' } do |form| %>
+      <%= form.select(:service_provider, options_for_select(
+            [['USD'],
+             ['CAD'],
+            ['EUR']]
+          ), {}, { :class => 'form-select', :id => 'currency-select' })%>
+    <% end %>
       <% if user_signed_in? %>
-      <% %>
-
         <%= button_to "Log Out", session_path, method: :delete, :class => "btn btn-secondary" %>
       <% else %>
         <%= button_to "Log Out", session_path, method: :delete, :class => "btn btn-secondary", :style => "visibility: hidden;" %>
       <% end %>
+
     </div>
   </div>
 </nav>
 <div class="container d-flex align-items-center justify-content-center navbar-notice"><%= notice %></div>
 <div class="container d-flex align-items-center justify-content-center navbar-alert"><%= alert %></div>
+
+<%= javascript_include_tag 'currency_change', 'data-turbo-track': 'reload', defer: true %>
