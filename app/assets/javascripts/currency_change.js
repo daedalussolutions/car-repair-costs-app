@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
     var currencyForm = document.getElementById('currency-form');
 
     currencySelect.addEventListener('change', () => {
-        console.log('Currency Changed')
         currencyForm.submit();
       });
 });
