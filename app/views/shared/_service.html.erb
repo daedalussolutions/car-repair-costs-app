@@ -23,8 +23,8 @@
         <div class="col-md-4">
           <h3>Service Information</h3>
           <ul class="list-group">
-            <li class="list-group-item">Minimum Price: $<%= service.minimum_price %> USD</li>
-            <li class="list-group-item">Maximum Price: $<%= service.maximum_price %> USD</li>
+            <li class="list-group-item">Minimum Price: <%= number_to_currency(convert_price(service.minimum_price, current_user.currency), unit: currency_symbol(current_user.currency)) %></li>
+            <li class="list-group-item">Maximum Price: <%= number_to_currency(convert_price(service.maximum_price, current_user.currency), unit: currency_symbol(current_user.currency))  %></li>
             <li class="list-group-item">Most Common Service Provider: Mr. Lube</li>
           </ul>
         </div>

@@ -18,7 +18,8 @@ User.create!([{
 currencies = [
   "USD", 
   "CAD", 
-  "EUR"
+  "EUR",
+  "GBP"
 ]
 
 vehicle_makes = [
