@@ -1,10 +1,10 @@
-<% if @services.any? %>
   <div class="row">
     <div class="col-md-3">
       <%= form_with(url: services_path, method: :get, local: true, class: 'form-inline my-1 my-lg-0 search-form') do %>
         <%= text_field_tag :query, params[:query], placeholder: "Search services...", class: "form-control mr-sm-2" %>
         <%= submit_tag ("Search") , class:'btn btn-primary '%>
       <% end %>
+      <% if @services.any? %>
       <% @services.each_with_index do |service|%>
         <div class="card option-card p-2 m-4 service-card" style="width: 22rem;" data-index="<%= service.id %>">
           <div class="card-body">
@@ -23,7 +23,7 @@
     </div>
   </div>
 <% else %>
-  <p>No services</p>
+  <h2 class="text-center mt-5">No services</h2>
 <% end %>
 
 <%= javascript_include_tag 'services', 'data-turbo-track': 'reload', defer: true %>
