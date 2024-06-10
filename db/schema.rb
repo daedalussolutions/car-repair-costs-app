@@ -28,12 +28,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_215206) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
+    t.integer "vehicle_make_id"
+    t.integer "vehicle_model_id"
+    t.integer "vehicle_year_id"
     t.string "vehicle_make_name"
     t.string "vehicle_model_name"
     t.string "vehicle_year_year"
     t.string "service_provider"
     t.index ["service_id"], name: "index_reviews_on_service_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+    t.index ["vehicle_make_id"], name: "index_reviews_on_vehicle_make_id"
+    t.index ["vehicle_model_id"], name: "index_reviews_on_vehicle_model_id"
+    t.index ["vehicle_year_id"], name: "index_reviews_on_vehicle_year_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -59,10 +65,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_215206) do
 
   create_table "vehicle_makes", force: :cascade do |t|
     t.string "name"
+    t.integer "vehicle_model_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "review_id"
-    t.index ["review_id"], name: "index_vehicle_makes_on_review_id"
+    t.index ["vehicle_model_id"], name: "index_vehicle_makes_on_vehicle_model_id"
   end
 
   create_table "vehicle_models", force: :cascade do |t|
@@ -83,17 +89,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_215206) do
     t.index ["vehicle_model_id"], name: "index_vehicle_years_on_vehicle_model_id"
   end
 
-  create_table "vehicles", force: :cascade do |t|
-    t.string "make"
-    t.string "model"
-    t.integer "year"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   add_foreign_key "reviews", "services"
   add_foreign_key "reviews", "users"
-  add_foreign_key "vehicle_makes", "reviews"
+  add_foreign_key "reviews", "vehicle_makes"
+  add_foreign_key "reviews", "vehicle_models"
+  add_foreign_key "reviews", "vehicle_years"
+  add_foreign_key "vehicle_makes", "vehicle_models"
   add_foreign_key "vehicle_models", "vehicle_makes"
   add_foreign_key "vehicle_models", "vehicle_years"
   add_foreign_key "vehicle_years", "vehicle_models"
