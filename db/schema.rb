@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_13_215206) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_10_212105) do
   create_table "currencies", force: :cascade do |t|
     t.string "code"
     t.datetime "created_at", null: false
@@ -65,27 +65,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_215206) do
 
   create_table "vehicle_makes", force: :cascade do |t|
     t.string "name"
-    t.integer "vehicle_model_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["vehicle_model_id"], name: "index_vehicle_makes_on_vehicle_model_id"
   end
 
   create_table "vehicle_models", force: :cascade do |t|
     t.string "name"
-    t.integer "vehicle_make_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "vehicle_year_id"
+    t.integer "vehicle_make_id"
     t.index ["vehicle_make_id"], name: "index_vehicle_models_on_vehicle_make_id"
-    t.index ["vehicle_year_id"], name: "index_vehicle_models_on_vehicle_year_id"
   end
 
   create_table "vehicle_years", force: :cascade do |t|
     t.integer "year"
-    t.integer "vehicle_model_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "vehicle_model_id"
     t.index ["vehicle_model_id"], name: "index_vehicle_years_on_vehicle_model_id"
   end
 
@@ -94,8 +90,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_215206) do
   add_foreign_key "reviews", "vehicle_makes"
   add_foreign_key "reviews", "vehicle_models"
   add_foreign_key "reviews", "vehicle_years"
-  add_foreign_key "vehicle_makes", "vehicle_models"
   add_foreign_key "vehicle_models", "vehicle_makes"
-  add_foreign_key "vehicle_models", "vehicle_years"
   add_foreign_key "vehicle_years", "vehicle_models"
 end
