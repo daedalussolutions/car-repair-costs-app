@@ -9,7 +9,7 @@
         <div class="card option-card p-2 m-4 service-card" style="width: 22rem;" data-index="<%= service.id %>">
           <div class="card-body">
             <h5 class="card-title"><%= service.title %></h5>
-            <h6 class="card-subtitle mb-2 text-muted">Average Price: <%= number_to_currency(convert_price(service.average_price, current_user.currency), unit: currency_symbol(current_user.currency)) %></h6>
+            <h6 class="card-subtitle mb-2 text-muted">Average Price: <%= number_to_currency(convert_price(service.average_price, @currency), unit: currency_symbol(@currency)) %></h6>
           </div>
         </div>
       <% end %>

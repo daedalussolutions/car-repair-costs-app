@@ -1,24 +1,29 @@
-<div class="account-container" style="display: flex; margin: 2% 5%;">
-  
-  <div style="margin: 0 5%;">
-    <h3>Hello, <%= current_user.first_name %></h3>
-    <button class="btn btn-primary ms-1 mt-3" style="width: 100%"><%= link_to "Edit Password", edit_password_path, :class => "dropdown-item" %></button><br>
-    <button class="btn btn-primary ms-1 mt-3" style="width: 100%"><%= link_to "Edit Name", edit_name_path, :class => "dropdown-item" %></button><br>
-    <button class="btn btn-primary ms-1 mt-3" style="width: 100%"><%= link_to "Edit Email", edit_email_path, :class => "dropdown-item" %></button>
-    <%= button_to "Log Out", session_path, method: :delete, :class => "btn btn-primary ms-1 mt-3", :style => "width: 100%" %>
-    <%= button_to "Delete Account", session_path, method: :delete, :class => "btn btn-danger ms-1 mt-3", :style => "width: 100%" %>
-  </div>
-  <div class="users-reviews m-3" style="width: 70%;">
-          <h2 style="text-align: center;">My Reviews</h2>
-          <% if @reviews.any? %>
-  
-          <% @reviews.each do |review| %>
-            <%= render partial: 'service/review', locals: { review: review } %>
+
+<% if user_signed_in? %>
+  <div class="account-container" style="display: flex; margin: 2% 5%;">
+    
+    <div style="margin: 0 5%;">
+      <h3>Hello, <%= current_user.first_name %></h3>
+      <button class="btn btn-primary ms-1 mt-3" style="width: 100%"><%= link_to "Edit Password", edit_password_path, :class => "dropdown-item" %></button><br>
+      <button class="btn btn-primary ms-1 mt-3" style="width: 100%"><%= link_to "Edit Name", edit_name_path, :class => "dropdown-item" %></button><br>
+      <button class="btn btn-primary ms-1 mt-3" style="width: 100%"><%= link_to "Edit Email", edit_email_path, :class => "dropdown-item" %></button>
+      <%= button_to "Log Out", session_path, method: :delete, :class => "btn btn-primary ms-1 mt-3", :style => "width: 100%" %>
+      <%= button_to "Delete Account", session_path, method: :delete, :class => "btn btn-danger ms-1 mt-3", :style => "width: 100%" %>
+    </div>
+    <div class="users-reviews m-3" style="width: 70%;">
+            <h2 style="text-align: center;">My Reviews</h2>
+            <% if @reviews.any? %>
+    
+            <% @reviews.each do |review| %>
+              <%= render partial: 'service/review', locals: { review: review } %>
+            <% end %>
+          <%= page_entries_info @reviews %>
+          <div class="digg_pagination"><%= will_paginate @reviews %></div>
+          <% else %>
+            <p>No reviews yet.</p>
           <% end %>
-        <%= page_entries_info @reviews %>
-        <div class="digg_pagination"><%= will_paginate @reviews %></div>
-        <% else %>
-          <p>No reviews yet.</p>
-        <% end %>
-      </div>
-</div>
+        </div>
+  </div>
+<% else %>
+  <h1 class="m-5">You must be logged in to view your account.</h1>
+<% end %>

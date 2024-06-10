@@ -1,4 +1,13 @@
 class ApplicationController < ActionController::Base
+    before_action :set_currency
+
+    def set_currency
+        if user_signed_in?
+            @currency = Current.user.currency
+        else
+            @currency = cookies[:currency] || 'USD'
+        end
+    end
 
     private
 

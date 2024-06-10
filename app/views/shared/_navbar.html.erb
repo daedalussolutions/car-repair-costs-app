@@ -27,12 +27,20 @@
              ['CAD'],
             ['EUR'],
             ['GBP']],
-            current_user.currency
+            @currency
           ), {}, { :class => 'form-select', :id => 'currency-select' })%>
         <% end %>
         <%= button_to "Log Out", session_path, method: :delete, :class => "btn btn-secondary" %>
       <% else %>
-        <%= button_to "Log Out", session_path, method: :delete, :class => "btn btn-secondary", :style => "visibility: hidden;" %>
+      <%= form_with url: currency_path, html: { id: 'currency-form', style: 'margin-right: 10px' } do |form| %>
+          <%= form.select(:currency, options_for_select(
+            [['USD'],
+             ['CAD'],
+            ['EUR'],
+            ['GBP']],
+            @currency
+          ), {}, { :class => 'form-select', :id => 'currency-select' })%>
+        <% end %>
       <% end %>
 
     </div>

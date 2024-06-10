@@ -7,7 +7,7 @@
                 <div class="card option-card p-2 m-4" style="width: 23rem;">
                     <div class="card-body">
                         <h5 class="card-title"><%= service.title %></h5>
-                        <h6 class="card-subtitle mb-2"><%= number_to_currency(convert_price(service.minimum_price, current_user.currency), unit: currency_symbol(current_user.currency)) %> - <%= number_to_currency(convert_price(service.maximum_price, current_user.currency), unit: currency_symbol(current_user.currency)) %> (WrenchPortal est.)</h6>
+                        <h6 class="card-subtitle mb-2"><%= number_to_currency(convert_price(service.minimum_price, @currency), unit: currency_symbol(@currency)) %> - <%= number_to_currency(convert_price(service.maximum_price, @currency), unit: currency_symbol(@currency)) %> (WrenchPortal est.)</h6>
                     </div>
                 </div>
             <% end %>
